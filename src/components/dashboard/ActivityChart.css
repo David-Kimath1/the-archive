@@ -1,0 +1,86 @@
+.area-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.area-chart__svg {
+  width: 100%;
+  height: clamp(120px, 24vw, 180px);
+  overflow: visible;
+  touch-action: pan-y;
+  cursor: crosshair;
+}
+
+.area-chart__svg:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 5px;
+  border-radius: var(--radius-sm);
+}
+
+.area-chart__line {
+  filter: drop-shadow(0 2px 3px rgba(209, 132, 95, 0.22));
+}
+
+.area-chart__crosshair {
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  pointer-events: none;
+  transition: x1 120ms linear, x2 120ms linear;
+}
+
+.area-chart__halo {
+  fill: var(--color-accent);
+  opacity: 0.22;
+  pointer-events: none;
+  transition: cx 120ms linear, cy 120ms linear;
+}
+
+.area-chart__active-point {
+  fill: var(--color-text-primary);
+  stroke: var(--color-accent);
+  stroke-width: 3;
+  pointer-events: none;
+  transition: cx 120ms linear, cy 120ms linear;
+}
+
+.area-chart__tooltip {
+  pointer-events: none;
+  transition: transform 120ms linear;
+}
+
+.area-chart__tooltip rect {
+  fill: var(--color-bg-sunken);
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+  filter: drop-shadow(0 3px 7px rgba(0, 0, 0, 0.28));
+}
+
+.area-chart__tooltip text {
+  fill: var(--color-text-primary);
+  font-size: 9px;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-semibold);
+}
+
+.area-chart__tooltip .area-chart__tooltip-day {
+  fill: var(--color-text-tertiary);
+  font-size: 7px;
+  font-weight: var(--weight-regular);
+}
+
+.area-chart__labels {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 4px;
+}
+
+.area-chart__label {
+  font-size: 10px;
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

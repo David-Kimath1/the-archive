@@ -1,0 +1,76 @@
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  min-height: 100vh;
+  transition:
+    grid-template-columns 420ms var(--ease-out),
+    background-color var(--duration-slow) var(--ease-in-out);
+}
+
+.app-shell--sidebar-collapsed {
+  grid-template-columns: 0 minmax(0, 1fr);
+}
+
+.app-shell--sidebar-collapsed .sidebar {
+  width: 0;
+  min-width: 0;
+  padding-inline: 0;
+  border: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.app-shell__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-shell__content {
+  flex: 1;
+  min-width: 0;
+  padding-block: var(--space-8);
+}
+
+.app-shell__scrim {
+  position: fixed;
+  z-index: calc(var(--z-modal) - 1);
+  inset: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(3, 10, 18, 0.64);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 380ms var(--ease-in-out),
+    visibility 380ms;
+}
+
+.app-shell__scrim.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (max-width: 1023px) {
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Add plenty of padding so the floating nav never overlaps content */
+  .app-shell__content {
+    padding-bottom: calc(
+      72px + var(--space-12) + env(safe-area-inset-bottom, 16px)
+    );
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell,
+  .app-shell__scrim {
+    transition-duration: 0.01ms;
+  }
+}
